@@ -1,4 +1,3 @@
-
 output "service-account-email" {
   value = {
     component-access-sa-email   = google_service_account.component-access-sa.email
@@ -33,5 +32,6 @@ output "local-key-files" {
   value = {
     logging-monitoring-sa-key-file = "Your logging-monitoring service account key file is located at ${local_file.logging-monitoring-sa-key-file.filename}"
     connect-register-sa-key-file   = "Your connect-register service account key file is located at ${local_file.connect-register-sa-key-file.filename}"
+    component-access-sa-key-file   = "Your component-access service account key file is located at ${local_file.component-access-sa-key-file.filename}"
   }
 }
