@@ -1,0 +1,40 @@
+name: "Test Terraform"
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - test
+
+  pull_request:
+
+  workflow_dispatch:
+
+jobs:
+  terraform-test:
+    name: "Terraform Test"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate
